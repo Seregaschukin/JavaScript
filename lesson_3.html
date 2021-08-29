@@ -2,7 +2,7 @@
 	<script type="text/javascript">
 		//1. С помощью цикла while вывести все простые числа в промежутке от 0 до 100.
 		{
-			let n = 10;
+			let n = 100;
 
 			nextStep:
 			for (let i = 2; i <= n; i++) {
@@ -23,29 +23,15 @@
 		{
 
 			let basket = [
-			  {name: "product_1", price: 10},
-			  {name: "product_2", price: 20},
-			  {name: "product_3", price: 30}
+			  ['product_1', 10],
+			  ['product_2', 20],
+			  ['product_3', 30]
 			];
-			var sum = basket.price
-			console.log(sum)
-
-			for(let i = 0; i < basket.length; i++){
-				console.log(basket[i])
-				for(let j = 0; j < basket[i].length; j++){
-					console.log(j)
-				}
-			}
-			let bas = basket.find(item => item.name == "product_1");
-			console.log(bas.price);
-			
-			//let arr = [[1, 2, 3, 4, 5], [6, 7, 8], [9, 10]];
-
-			//for (let subArr of arr) {
-				//for (let elem of subArr) {
-					//console.log(elem);
-					//}
-				//}
+			let sumBasket = 0;
+			for (let i = 0; i < basket.length; i++) {
+				sumBasket += basket[i][1]
+			} 
+			console.log(sumBasket);
 		}
 		
 		/*3.*Вывести с помощью цикла for числа от 0 до 9, не используя тело цикла. Выглядеть это должно так:
