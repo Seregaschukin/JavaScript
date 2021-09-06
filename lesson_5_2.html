@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <script src="./cart.js" defer></script>
+    <style>
+        .good {
+            border: 1px solid #000;
+            margin-bottom: 5px;
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="catalog">
+</div>
+
+<div class="cart-list"></div>
+<button class="cart-btn">Очистить корзину</button>
+<script type="text/javascript">
+    const cartItem = {
+    render(good) {
+        return `<div class="good">
+                    <div><b>Наименование</b>: ${good.name}</div>
+                    <div><b>Цена за шт.</b>: ${good.price}</div>
+                    <div><b>Количество</b>: ${good.cnt}</div>
+                    <div><b>Стоимость</b>: ${good.price * good.cnt}</div>
+                </div>`;
+    }
+}
+
+const cart = {
+    cartListBlock: null,
+    cartButton: null,
+    cartItem,
+    goods: [
+        {
+            name: 'product_1',
+            price: 10,
+            cnt: 1
+          },
+          {
+            name:'product_2',
+            price: 30,
+            cnt: 1
+          },
+          {
+            name: 'product_3',
+            price: 20,
+            cnt: 1
+          }
+        ],
+
+    init() {
+        this.cartListBlock = document.querySelector('.cart-list');
+        this.cartButton = document.querySelector('.cart-btn');
+        this.cartButton.addEventListener('click', this.clearCart.bind(this));
+
+        this.render();
+    },
+    render() {
+        if (this.goods.length) {
+            this.goods.forEach(good => {
+                this.cartListBlock.insertAdjacentHTML('beforeend', this.cartItem.render(good));
+            });
+            this.cartListBlock.insertAdjacentHTML('beforeend', `В корзине ${this.goods.length} позиций(я) стоимостью ${this.getCartPrice()}`);
+        } else {
+            this.cartListBlock.textContent = 'Корзина пуста';
+        }
+    },
+    getCartPrice() {
+        return this.goods.reduce(function (price, good) {
+            return price + good.price * good.cnt;
+        }, 0);
+    },
+    clearCart() {
+        this.goods = [];
+        this.render();
+    },
+};
+
+cart.init();
+
+  </script>
+</body>
+</html>
